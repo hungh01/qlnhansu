@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Nhân Viên</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+    <th:block th:replace="layout :: header"></th:block>
+    <div class="container">
+       <form th:action="@{/add}" th:object="${nhanVien}" method="post">
+
+        <div class="col-6 mb-3">
+            <label class="title" for="title">Mã Nhân Viên:</label>
+            <input class="form-control" type="text" th:field="*{Ma_NV}" id="Ma_NV">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="title" for="title">Tên Nhân Viên:</label>
+            <input class="form-control" type="text" th:field="*{Ten_NV}" id="Ten_NV">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="title" for="title">Phái:</label>
+            <input class="form-control" type="text" th:field="*{Phai}" id="Phai">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="title" for="title">Nơi Sinh:</label>
+            <input class="form-control" type="text" th:field="*{Noi_Sinh}" id="Noi_Sinh">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="title" for="title">Phòng Ban:</label>
+            <select class = "form-control" id = "PhongBan" name="PhongBan.MaPhong">
+                <option value="">--Chọn Phòng Ban--</option>
+                <option th:each="phongBan : ${phongBans}" th:value = "${phongBan.MaPhong}"
+                        th:text="${phongBan.TenPhong}"></option>
+            </select>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="title" for="title">Lương:</label>
+            <input class="form-control" type="text" th:field="*{Luong}" id="Luong">
+
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save">
+       </form>
+       <br>
+       <a th:href = "@{/}">Back to list</a>
+    </div>
+    <th:block th:replace="layout :: footer"></th:block> 
+</body>
+</html>

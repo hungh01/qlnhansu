@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản Lý Nhân Sự</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+    <th:block th:replace="layout :: header"></th:block>
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Mã Nhân Viên</th>
+                <th>Tên Nhân Viên</th>
+                <th>Giới Tính</th>
+                <th>Nơi Sinh</th>
+                <th>Tên Phòng</th>
+                <th>Lương</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="nhanVien : ${nhanViens}">
+                <td th:text="${nhanVien.Ma_NV}"></td>
+                <td th:text="${nhanVien.Ten_NV}"></td>
+                <td th:switch="${nhanVien.Phai}" >
+                    <img th:case="Nữ" src="img/woman.png" width="30" height="30">
+                    <img th:case="Nam" src="img/men.jpeg" width="30" height="30">
+                </td>
+                <td th:text="${nhanVien.Noi_Sinh}"></td>
+                <td th:text="${nhanVien.Luong}"></td>
+                <td th:text="${nhanVien.phongBan.TenPhong}"></td>
+                <td>
+                    <a th:href="@{/edit/{id}(id=${nhanVien.Ma_NV})}">Edit</a>|
+                    <a th:href="@{/delete/{id}(id=${nhanVien.Ma_NV})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>

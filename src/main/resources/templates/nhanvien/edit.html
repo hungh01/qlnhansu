@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+    <th:block th:replace="layout :: header"></th:block>
+    <div class="container">
+        <form th:action="@{/edit/{id}(id=${nhanVien.Ma_NV})}" th:object="${nhanVien}"method="post">
+            <div class="col-6 mb-3">
+                <label class="form-label" for="title">Mã nhân viên: </label>
+                <br>
+                <input class="form-control" type="text" th:field ="*{Ma_NV}" id="Ma_NV">
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label" for="author">Tên NV: </label>
+                <br>
+                <input class="form-control" type="text" th:field ="*{Ten_NV}" id="Ten_NV">
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label" for="price">Giới Tính: </label>
+                <br>
+                <input class="form-control" type="text" th:field ="*{Phai}" id="Phai">
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label" for="price">Nơi Sinh: </label>
+                <br>
+                <input class="form-control" type="text" th:field ="*{Noi_Sinh}" id="Noi_Sinh">
+            </div>
+            <div class="col-6 mb-3">
+                <label class="title" for="title">Phòng Ban:</label>
+                <br>
+                <select class = "form-control" id="phongBan" name="phongBan.MaPhong">
+                    <option th:value="${nhanVien.phongBan.MaPhong}" th:text="${nhanVien.phongBan.TenPhong}"></option>
+                    <option th:each="phongBan : ${phongBans}" th:value = "${phongBan.MaPhong}"
+                            th:text="${phongBan.TenPhong}"></option>
+                </select>
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label" for="price">Lương: </label>
+                <br>
+                <input class="form-control" type="text" th:field ="*{Luong}" id="Luong">
+            </div>
+            <input class="btn btn-success" type="submit" value="Save">
+        </form>
+       
+       <br>
+       <a th:href = "@{/}">Back to list</a>
+    </div>
+    <th:block th:replace="layout :: footer"></th:block> 
+</body>
+</html>
